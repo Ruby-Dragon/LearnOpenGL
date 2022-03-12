@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 # OpenGL
 find_package(OpenGL REQUIRED)
 
-link_directories(src/libs/)
+set(LIBS_PATH "src/libs" CACHE PATH "libraries directory" )
+link_directories(${LIBS_PATH})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
