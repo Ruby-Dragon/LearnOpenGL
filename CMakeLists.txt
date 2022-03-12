@@ -3,6 +3,9 @@ project(LearnOpenGL)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include_directories(src/include)
+link_directories(src/libs)
+
 add_executable(LearnOpenGL
         src/main.cpp)
 
