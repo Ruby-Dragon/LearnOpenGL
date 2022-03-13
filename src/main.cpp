@@ -45,6 +45,14 @@ int main()
 	glCompileShader(vertexShader);
 	//end vertex.vsh
 
+	//fragment.fsh
+	const char* fragmentShaderSource = readFile("shaders/fragment.fsh").c_str();
+	unsigned int fragmentShader;
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	glCompileShader(fragmentShader);
+	//end fragment.fsh
+
 	//END SHADERS
 
 	//triangle
