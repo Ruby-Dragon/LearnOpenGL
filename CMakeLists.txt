@@ -28,6 +28,7 @@ set(MY_HEADER_FILES
 set(MY_SOURCE_FILES
         # put all your .c/.cpp here.
         src/main.cpp
+        src/glad.c
         # ../common/shader.cpp
         )
 
