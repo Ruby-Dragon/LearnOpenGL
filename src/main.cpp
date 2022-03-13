@@ -37,21 +37,34 @@ int main()
 
 	//SHADERS
 
+	std::string shaderSourceBuffer;
+
 	//vertex.vsh
-	const char* vertexShaderSource = readFile("shaders/vertex.vsh").c_str();
+	shaderSourceBuffer =  readFile("shaders/vertex.vsh");
+	const char* vertexShaderSource = shaderSourceBuffer.c_str();
 	unsigned int vertexShader;
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
 	glCompileShader(vertexShader);
 	//end vertex.vsh
 
 	//fragment.fsh
-	const char* fragmentShaderSource = readFile("shaders/fragment.fsh").c_str();
+	shaderSourceBuffer =  readFile("shaders/fragment.fsh");
+	const char* fragmentShaderSource = shaderSourceBuffer.c_str();
 	unsigned int fragmentShader;
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
 	glCompileShader(fragmentShader);
 	//end fragment.fsh
+
+	unsigned int shaderProgram;
+	shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+	glUseProgram(shaderProgram);
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
 
 	//END SHADERS
 
