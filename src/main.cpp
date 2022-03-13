@@ -62,7 +62,6 @@ int main()
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
@@ -74,16 +73,33 @@ int main()
 			0.5f, -0.5f, 0.0f,
 			0.0f,  0.5f, 0.0f
 	};
+	//make VBO
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
+
+	//make VAO
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+
+	glBindVertexArray(VAO);
+
+	//Bind buffers to VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//set vertex attributes pointer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 
 	//render loop
 	while(!glfwWindowShouldClose(window))
 	{
 		//process window input
 		processInput(window);
+
+		glUseProgram(shaderProgram);
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		//render to screen
 		glfwSwapBuffers(window);
