@@ -23,16 +23,14 @@ set(MY_HEADER_FILES
         # put all your .h here. Right now we have none.
         # Example :
         # ../common/shader.hpp
-        )
+        src/include/read_file.hpp)
 
 set(MY_SOURCE_FILES
         # put all your .c/.cpp here.
         src/main.cpp
         src/glad.c
         # ../common/shader.cpp
-        )
-
-
+        src/read_file.cpp)
 
 include_directories(
         ${GLFW_INCLUDE_PATH}
@@ -50,3 +48,10 @@ target_link_libraries(LearnOpenGL
         ${GLFW_LIBRARY}
         #${GLEW_LIBRARY}
         )
+
+add_custom_command(
+        TARGET LearnOpenGL POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/shaders $<TARGET_FILE_DIR:LearnOpenGL>/shaders
+        COMMENT "Copying shaders" VERBATIM
+)

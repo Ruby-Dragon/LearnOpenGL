@@ -1,6 +1,7 @@
 #include <iostream>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "read_file.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -32,6 +33,30 @@ int main()
 	glViewport(0, 0, 800, 600);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+
+	//SHADERS
+
+	//vertex.vsh
+	const char* vertexShaderSource = readFile("shaders/vertex.vsh").c_str();
+	unsigned int vertexShader;
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glCompileShader(vertexShader);
+	//end vertex.vsh
+
+	//END SHADERS
+
+	//triangle
+	float vertices[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f,  0.5f, 0.0f
+	};
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	//render loop
 	while(!glfwWindowShouldClose(window))
