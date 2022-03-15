@@ -2,6 +2,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "read_file.hpp"
+#include <math.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -111,6 +112,12 @@ int main()
 	{
 		//process window input
 		processInput(window);
+
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+        glUseProgram(shaderProgram);
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
