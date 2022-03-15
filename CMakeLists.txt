@@ -24,7 +24,7 @@ set(MY_HEADER_FILES
         # Example :
         # ../common/shader.hpp
         src/include/read_file.hpp
-        src/include/shader.hpp)
+        src/include/shader.hpp src/include/image/stb_image.h)
 
 set(MY_SOURCE_FILES
         # put all your .c/.cpp here.
