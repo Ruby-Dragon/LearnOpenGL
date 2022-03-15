@@ -112,7 +112,6 @@ int main()
 		//process window input
 		processInput(window);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

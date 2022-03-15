@@ -32,5 +32,6 @@
 *.app
 /cmake-build-debug/
 /cmake-build-debug-visual-studio/
+/.idea
 /bin/
 /builds/
