@@ -1,8 +1,7 @@
 #include <iostream>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "read_file.hpp"
-#include <math.h>
+#include "shader.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -38,33 +37,8 @@ int main()
 
 	//SHADERS
 
-	std::string shaderSourceBuffer;
-
-	//vertex.vsh
-	shaderSourceBuffer =  readFile("shaders/vertex.vsh");
-	const char* vertexShaderSource = shaderSourceBuffer.c_str();
-	unsigned int vertexShader;
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-	glCompileShader(vertexShader);
-	//end vertex.vsh
-
-	//fragment.fsh
-	shaderSourceBuffer =  readFile("shaders/fragment.fsh");
-	const char* fragmentShaderSource = shaderSourceBuffer.c_str();
-	unsigned int fragmentShader;
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-	glCompileShader(fragmentShader);
-	//end fragment.fsh
-
-	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	Shader ourShader = Shader("shaders/vertex.vsh", "shaders/fragment.fsh");
+    ourShader.use();
 
 	//END SHADERS
 
@@ -97,7 +71,7 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glUseProgram(shaderProgram);
+    glUseProgram(ourShader.ID);
 
 
 	//render loop
