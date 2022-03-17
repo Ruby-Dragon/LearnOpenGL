@@ -31,7 +31,7 @@ set(MY_SOURCE_FILES
         src/main.cpp
         src/glad.c
         # ../common/shader.cpp
-        src/read_file.cpp src/shader.cpp)
+        src/read_file.cpp src/shader.cpp src/stb_image_impl..cpp)
 
 include_directories(
         ${GLFW_INCLUDE_PATH}
@@ -54,5 +54,12 @@ add_custom_command(
         TARGET LearnOpenGL POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/src/shaders $<TARGET_FILE_DIR:LearnOpenGL>/shaders
+        COMMENT "Copying shaders" VERBATIM
+)
+
+add_custom_command(
+        TARGET LearnOpenGL POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/textures $<TARGET_FILE_DIR:LearnOpenGL>/textures
         COMMENT "Copying shaders" VERBATIM
 )
